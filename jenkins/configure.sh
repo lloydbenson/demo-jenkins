@@ -14,6 +14,14 @@ done
 echo "Restarting Jenkins"
 java -jar jenkins-cli.jar -s http://localhost:8080 restart
 
-sleep 15
+sleep 30
 
 echo "Installing jobs"
+popd
+pushd jobs
+for JOB in $(ls *.xml)
+do
+   echo "Installing job ${JOB}"
+   NAME=$(echo ${JOB} | awk -F'.xml' '{print $1}')
+   java -jar ../jenkins/jenkins-cli.jar -s http://localhost:8080 create-job ${NAME} < ${JOB}
+done
