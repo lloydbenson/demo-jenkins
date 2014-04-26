@@ -28,7 +28,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>jenkins/deploy.sh</command>
+      <command>jenkins/app/deploy.sh</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

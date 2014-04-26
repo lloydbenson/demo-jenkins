@@ -33,7 +33,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>jenkins/build.sh</command>
+      <command>jenkins/app/build.sh</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
