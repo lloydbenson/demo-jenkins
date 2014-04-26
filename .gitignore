@@ -1,0 +1,5 @@
+jenkins/jenkins
+*.hpi
+*.war
+*.log
+*.jar
