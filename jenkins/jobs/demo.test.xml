@@ -25,9 +25,62 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <org.jenkinsci.plugins.ghprb.GhprbTrigger plugin="ghprb@1.11.2">
+      <spec>* * * * *</spec>
+      <adminlist></adminlist>
+      <whitelist></whitelist>
+      <orgslist></orgslist>
+      <cron>* * * * *</cron>
+      <triggerPhrase></triggerPhrase>
+      <onlyTriggerPhrase>false</onlyTriggerPhrase>
+      <useGitHubHooks>false</useGitHubHooks>
+      <permitAll>false</permitAll>
+      <autoCloseFailedPullRequests>false</autoCloseFailedPullRequests>
+      <whiteListTargetBranches>
+        <org.jenkinsci.plugins.ghprb.GhprbBranch>
+          <branch></branch>
+        </org.jenkinsci.plugins.ghprb.GhprbBranch>
+      </whiteListTargetBranches>
+    </org.jenkinsci.plugins.ghprb.GhprbTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
-  <builders/>
-  <publishers/>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>app/test.sh</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2.2">
+      <recipientList>lloyd.benson@gmail.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>true</sendToRequester>
+            <includeCulprits>true</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_REPLYTO</replyTo>
+      <saveOutput>false</saveOutput>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
   <buildWrappers/>
 </project>
