@@ -12,7 +12,7 @@ echo "Downloading jenkins"
 curl -s -L -O http://mirrors.jenkins-ci.org/war/latest/jenkins.war
 
 ## grab plugins
-PLUGINS="github-api git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript"
+PLUGINS="github-api git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view"
 
 for PLUGIN in ${PLUGINS}
 do
