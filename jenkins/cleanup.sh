@@ -1,5 +1,14 @@
+#!/bin/bash
+
+echo "Shutting down master jenkins"
+cd master
+./stop.sh
+cd ..
+echo "Cleaning up master server"
+rm -rf master/jenkins
+rm -f master/*.log
 rm -f *.hpi
-rm -rf jenkins
 rm -f *.war
-rm -f *.jar
-rm -f *.log
+
+echo "Cleaning up slave"
+rm -rf slave/*

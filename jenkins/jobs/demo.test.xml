@@ -21,6 +21,7 @@
     <submoduleCfg class="list"/>
     <extensions/>
   </scm>
+  <assignedNode>slave</assignedNode>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>

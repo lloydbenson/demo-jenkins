@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slave>
+  <name>slave</name>
+  <description></description>
+  <remoteFS>/home/lloyd/app/demos/jenkins/slave</remoteFS>
+  <numExecutors>2</numExecutors>
+  <mode>NORMAL</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+    <host>localhost</host>
+    <port>22</port>
+    <credentialsId>cbbb3d41-0221-4a87-b194-052491f3f4d6</credentialsId>
+  </launcher>
+  <label>slave</label>
+  <nodeProperties/>
+  <userId>anonymous</userId>
+</slave>

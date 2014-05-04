@@ -1,6 +1,6 @@
-source .bashrc
+source jenkins/.bashrc
 TIMEOUT=60
-## clearing out jenkins log each time
+## clearing out jenkins-master.log each time
 rm -f jenkins.log
 java -jar jenkins/jenkins.war > jenkins.log 2>&1 &
 while true
