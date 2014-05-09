@@ -12,9 +12,11 @@ do
    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ${PLUGIN}.hpi
 done
 
-echo "Copying over master config.xml"
-cp ../../cfg/master/config.xml config.xml
-cp ../../cfg/master/credentials.xml credentials.xml
+echo "Copying over master global files"
+cp ../../cfg/global/master/*.xml .
+API_KEY=$(cat ../../cfg/global/master/apikey.txt)
+sed -i 's/demotoken/${API_KEY}/' org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
+
 
 echo "Installing slave"
 java -jar jenkins-cli.jar -s http://localhost:8080 create-node slave < ../../cfg/slave/node.xml
@@ -26,11 +28,11 @@ echo "Sleeping 30s"
 sleep 30
 popd
 echo "Installing jobs"
-pushd ../jobs
+pushd ../cfg/jobs
 for JOB in $(ls *.xml)
 do
    echo "Installing job ${JOB}"
    NAME=$(echo ${JOB} | awk -F'.xml' '{print $1}')
-   java -jar ../master/jenkins/jenkins-cli.jar -s http://localhost:8080 create-job ${NAME} < ${JOB}
+   java -jar ../../master/jenkins/jenkins-cli.jar -s http://localhost:8080 create-job ${NAME} < ${JOB}
 done
 popd

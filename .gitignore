@@ -4,3 +4,4 @@ jenkins/slave
 *.war
 *.log
 *.jar
+apikey.txt
