@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "Building App for 30s"
+echo "Building hapi demo"
+rm -f hapidemo.tar.gz
+rm -rf hapi/node_modules
 cd hapi
 npm install
 npm test
