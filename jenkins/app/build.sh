@@ -1,5 +1,10 @@
 #!/bin/bash
 
 echo "Building App for 30s"
-sleep 30
-exit 0
+cd hapi
+npm install
+npm test
+rm -rf node_modules
+npm install --production
+cd ..
+tar cvfz hapidemo.tar.gz hapi

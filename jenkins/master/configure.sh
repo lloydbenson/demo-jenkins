@@ -1,6 +1,7 @@
 #!/bin/bash
-## download the cli
+
 pushd jenkins
+## download the cli
 curl -s -L -O http://localhost:8080/jnlpJars/jenkins-cli.jar
 ## install plugins
 ## order matters with installation due to dependencies
@@ -15,11 +16,13 @@ done
 echo "Copying over master global files"
 cp ../../cfg/global/master/*.xml .
 API_KEY=$(cat ../../cfg/global/master/apikey.txt)
-sed -i 's/demotoken/${API_KEY}/' org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
+sed -i "s/demotoken/${API_KEY}/" org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
 
 
 echo "Installing slave"
-java -jar jenkins-cli.jar -s http://localhost:8080 create-node slave < ../../cfg/slave/node.xml
+SLAVE_PATH=$(pwd | sed 's/master/slave/g' | sed 's/\/jenkins$//g' | sed 's/\//\\\//g')
+sed -i "s/slavepath/${SLAVE_PATH}/" ../../cfg/global/slave/node.xml
+java -jar jenkins-cli.jar -s http://localhost:8080 create-node slave < ../../cfg/global/slave/node.xml
 
 echo "Restarting Jenkins"
 java -jar jenkins-cli.jar -s http://localhost:8080 restart

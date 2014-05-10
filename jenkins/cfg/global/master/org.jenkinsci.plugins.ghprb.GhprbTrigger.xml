@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <org.jenkinsci.plugins.ghprb.GhprbTrigger_-DescriptorImpl plugin="ghprb@1.11.2">
   <serverAPIUrl>https://api.github.com</serverAPIUrl>
-  <username></username>
+  <username>lloyddemo</username>
   <password></password>
   <accessToken>demotoken</accessToken>
   <adminlist>lloyddemo</adminlist>

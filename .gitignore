@@ -5,3 +5,4 @@ jenkins/slave
 *.log
 *.jar
 apikey.txt
+node_modules
