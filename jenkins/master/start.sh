@@ -1,7 +1,9 @@
 source jenkins/.bashrc
 TIMEOUT=60
 ## clearing out jenkins-master.log each time
+echo "Cleaning log out before we start"
 rm -f jenkins.log
+echo "Starting jenkins"
 java -jar jenkins/jenkins.war > jenkins.log 2>&1 &
 while true
 do
