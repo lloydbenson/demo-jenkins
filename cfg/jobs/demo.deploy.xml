@@ -3,22 +3,17 @@
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.8">
-      <projectUrl>http://github.com/lloydbenson/demos/</projectUrl>
-    </com.coravy.hudson.plugins.github.GithubProjectProperty>
-  </properties>
+  <properties/>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.1">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <refspec>+refs/pull/*:refs/remotes/origin/pr/*</refspec>
         <url>git@github.com:lloydbenson/demos</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>${sha1}</name>
+        <name>origin/master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -30,29 +25,11 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <org.jenkinsci.plugins.ghprb.GhprbTrigger plugin="ghprb@1.11.2">
-      <spec>* * * * *</spec>
-      <adminlist>lloyddemo</adminlist>
-      <whitelist></whitelist>
-      <orgslist></orgslist>
-      <cron>* * * * *</cron>
-      <triggerPhrase></triggerPhrase>
-      <onlyTriggerPhrase>false</onlyTriggerPhrase>
-      <useGitHubHooks>false</useGitHubHooks>
-      <permitAll>false</permitAll>
-      <autoCloseFailedPullRequests>false</autoCloseFailedPullRequests>
-      <whiteListTargetBranches>
-        <org.jenkinsci.plugins.ghprb.GhprbBranch>
-          <branch></branch>
-        </org.jenkinsci.plugins.ghprb.GhprbBranch>
-      </whiteListTargetBranches>
-    </org.jenkinsci.plugins.ghprb.GhprbTrigger>
-  </triggers>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>jenkins/app/test.sh</command>
+      <command>app/deploy.sh</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
