@@ -25,7 +25,7 @@ curl -s -L -O http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
 ##curl -s -L -O http://mirrors.jenkins-ci.org/war/latest/jenkins.war
 
 ## grab plugins
-PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view"
+PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view nodejs"
 
 for PLUGIN in ${PLUGINS}
 do
@@ -37,8 +37,8 @@ for TYPE in master slave
 do
    if [ ! -d "${TYPE}/jenkins" ];
    then
-      echo "mkdir ${TYPE}/jenkins"
-      mkdir ${TYPE}/jenkins
+      echo "mkdir -p ${TYPE}/jenkins"
+      mkdir -p ${TYPE}/jenkins
    fi
    if [ "${TYPE}" == "master" ];
    then

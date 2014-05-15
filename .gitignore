@@ -1,5 +1,5 @@
-jenkins/master
-jenkins/slave
+master/jenkins
+slave
 *.hpi
 *.war
 *.log

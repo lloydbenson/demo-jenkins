@@ -5,7 +5,7 @@ pushd jenkins
 curl -s -L -O http://localhost:8080/jnlpJars/jenkins-cli.jar
 ## install plugins
 ## order matters with installation due to dependencies
-PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view"
+PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view nodejs"
 
 for PLUGIN in ${PLUGINS}
 do
