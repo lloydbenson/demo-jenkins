@@ -61,7 +61,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>node --version
+      <command>sleep 60
+node --version
 npm --version
 npm install
 npm test</command>
