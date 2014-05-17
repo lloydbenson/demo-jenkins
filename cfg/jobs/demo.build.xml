@@ -14,7 +14,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>git@github.com:lloydbenson/demo-jenkins</url>
+        <url>git@github.com:lloydbenson/demo-hapi</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -40,7 +40,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>app/build.sh</command>
+      <command>build/build.sh</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
