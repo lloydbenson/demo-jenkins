@@ -21,8 +21,9 @@ sed -i "s/demotoken/${API_KEY}/" org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
 
 echo "Installing slave"
 SLAVE_PATH=$(pwd | sed 's/master/slave/g' | sed 's/\/jenkins$//g' | sed 's/\//\\\//g')
-sed -i "s/slavepath/${SLAVE_PATH}/" ../../cfg/global/slave/node.xml
-java -jar jenkins-cli.jar -s http://localhost:8080 create-node slave < ../../cfg/global/slave/node.xml
+cp ../../cfg/global/slave/node.xml node-template.xml
+sed -i "s/slavepath/${SLAVE_PATH}/" node-template.xml
+java -jar jenkins-cli.jar -s http://localhost:8080 create-node slave < node-template.xml
 
 echo "Restarting Jenkins"
 java -jar jenkins-cli.jar -s http://localhost:8080 restart
