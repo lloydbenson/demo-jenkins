@@ -7,6 +7,15 @@
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.8">
       <projectUrl>http://github.com/lloydbenson/hapi-examples/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>sha1</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.1">
     <configVersion>2</configVersion>
