@@ -33,17 +33,12 @@ do
    curl -s -L -O http://updates.jenkins-ci.org/latest/${PLUGIN}.hpi
 done
 
-for TYPE in master slave
-do
-   if [ ! -d "${TYPE}/jenkins" ];
-   then
-      echo "mkdir -p ${TYPE}/jenkins"
-      mkdir -p ${TYPE}/jenkins
-   fi
-   if [ "${TYPE}" == "master" ];
-   then
-      echo "Moving installation files to master/jenkins"
-      mv *.hpi jenkins.war master/jenkins
-      cp cfg/.bashrc master/jenkins
-   fi
-done
+if [ ! -d "master/jenkins" ];
+then
+   echo "mkdir -p master/jenkins"
+   mkdir -p master/jenkins
+fi
+
+echo "Moving installation files to master/jenkins"
+mv *.hpi jenkins.war master/jenkins
+cp cfg/.bashrc master/jenkins

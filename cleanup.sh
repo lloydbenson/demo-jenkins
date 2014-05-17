@@ -1,13 +1,12 @@
 #!/bin/bash
 
 echo "Shutting down master jenkins"
-cd master
-./stop.sh
-cd ..
+master/stop.sh
 echo "Shutting down demo server"
-cd slave/workspace/demo.deploy/bin
-./stop.sh
-cd ../../../..
+if [ -e "slave/workspace/demo.deploy/bin/stop.sh" ];
+then
+   slave/workspace/demo.deploy/bin/stop.sh
+fi
 echo "Cleaning up master server"
 rm -rf master/jenkins
 rm -f master/*.log
