@@ -1,17 +1,17 @@
-source master/jenkins/.bashrc
+source master/.bashrc
 TIMEOUT=60
 PORT=8081
-JENKINS_LOG="master/jenkins/log/jenkins.log"
+JENKINS_LOG="master/log/jenkins.log"
 ## clearing out jenkins-master.log each time
 echo "Cleaning log out before we start"
-if [ ! -d master/jenkins/log ];
+if [ ! -d master/log ];
 then
-   mkdir -p master/jenkins/log
+   mkdir -p master/log
 else 
    rm -f ${JENKINS_LOG}
 fi
 echo "Starting jenkins"
-java -jar master/jenkins/jenkins.war --httpPort=${PORT} > ${JENKINS_LOG} 2>&1 &
+java -jar master/jenkins.war --httpPort=${PORT} > ${JENKINS_LOG} 2>&1 &
 while true
 do
    sleep 5

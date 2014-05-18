@@ -8,7 +8,7 @@ then
    slave/workspace/demo.deploy/bin/stop.sh
 fi
 echo "Cleaning up master server"
-rm -rf master/jenkins
+rm -rf master
 rm -f *.hpi
 rm -f *.war
 

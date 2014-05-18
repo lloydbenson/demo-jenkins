@@ -33,12 +33,12 @@ do
    curl -s -L -O http://updates.jenkins-ci.org/latest/${PLUGIN}.hpi
 done
 
-if [ ! -d "master/jenkins" ];
+if [ ! -d "master" ];
 then
-   echo "mkdir -p master/jenkins"
-   mkdir -p master/jenkins
+   echo "mkdir -p master"
+   mkdir -p master
 fi
 
-echo "Moving installation files to master/jenkins"
-mv *.hpi jenkins.war master/jenkins
-cp cfg/.bashrc master/jenkins
+echo "Moving installation files to master"
+mv *.hpi jenkins.war master
+cp cfg/.bashrc master

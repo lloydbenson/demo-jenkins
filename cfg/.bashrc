@@ -1,1 +1,1 @@
-export JENKINS_HOME=`pwd`/jenkins
+export JENKINS_HOME=`pwd`/master

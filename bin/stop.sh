@@ -2,7 +2,7 @@
 TIMEOUT=60
 PORT=8081
 ## stop
-java -jar master/jenkins/jenkins-cli.jar -s http://localhost:${PORT} shutdown >/dev/null 2>&1
+java -jar master/jenkins-cli.jar -s http://localhost:${PORT} shutdown >/dev/null 2>&1
 
 while true
 do
