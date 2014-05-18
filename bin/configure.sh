@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PORT=8081
-pushd jenkins
+pushd master/jenkins
 ## download the cli
 echo "Downloading the CLI from localhost"
 curl -s -L -O http://localhost:${PORT}/jnlpJars/jenkins-cli.jar
@@ -36,7 +36,7 @@ echo "Sleeping 30s"
 sleep 30
 popd
 echo "Installing jobs"
-pushd ../cfg/jobs
+pushd cfg/jobs
 for JOB in $(ls *.xml)
 do
    NAME=$(echo ${JOB} | awk -F'.xml' '{print $1}')
