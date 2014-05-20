@@ -7,3 +7,13 @@ This is a jenkins demo.  Here are the steps to set it up.
 3.  bin/configure.sh - this will install the main config, ssh slave, plugins, and setup some example jobs.
 4.  bin/stop.sh - this will stop jenkins
 5.  bin/cleanup.sh - this will stop and then cleanup all the files that got generated for nice cleanup
+
+The PR portion of the demo will not work for you due to obvious security reasons.  If you want to see it work, you can change the following:
+
+1.  change the git repo in the pr job to your own repo
+2.  setup a user with pull/push privs for that repo
+3.  to go the global configuration and put in your github.com api key for that user (you can generate one in that same location)
+4.  change the lloyddemo user in the global configuration to your user
+5.  change the lloyddemo user in the demo.pr job to your user
+
+if you actually tried this out, let me know that it worked!
