@@ -8,7 +8,7 @@ echo "Downloading the CLI from localhost"
 curl -s -L -O http://localhost:${JENKINS_PORT}/jnlpJars/jenkins-cli.jar
 ## install plugins
 ## order matters with installation due to dependencies
-PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view nodejs"
+PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view nodejs tap"
 
 for PLUGIN in ${PLUGINS}
 do

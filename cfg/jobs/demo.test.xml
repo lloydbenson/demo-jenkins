@@ -41,10 +41,22 @@
   <builders>
     <hudson.tasks.Shell>
       <command>npm install
-npm test</command>
+make test-cov-tap</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
+    <org.tap4j.plugin.TapPublisher plugin="tap@1.18">
+      <testResults>coverage.tap</testResults>
+      <failIfNoResults>false</failIfNoResults>
+      <failedTestsMarkBuildAsFailure>false</failedTestsMarkBuildAsFailure>
+      <outputTapToConsole>false</outputTapToConsole>
+      <enableSubtests>false</enableSubtests>
+      <discardOldReports>false</discardOldReports>
+      <todoIsFailure>false</todoIsFailure>
+      <includeCommentDiagnostics>false</includeCommentDiagnostics>
+      <validateNumberOfTests>false</validateNumberOfTests>
+      <planRequired>true</planRequired>
+    </org.tap4j.plugin.TapPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2.2">
       <recipientList>lloyd.benson@gmail.com</recipientList>
       <configuredTriggers>
