@@ -46,7 +46,7 @@ JENKINS_PATH="/war-stable/latest/jenkins.war"
 if [ ! -e jenkins.war ];
 then
    curl -s -L -O ${JENKINS_SITE}/war-stable/latest/jenkins.war
-   if [ $(file jenkins.war | grep -i html | wc -l) -gt 0 ];
+   if [ $(file jenkins.war | grep -i zip | wc -l) -eq 0 ];
    then
       echo "jenkins.war may not have been downloaded correctly.  try again."
       rm -f jenkins.war
@@ -55,7 +55,7 @@ then
 fi
 
 ## grab plugins
-PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view nodejs tap chucknorris"
+PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view nodejs tap chucknorris htmlpublisher"
 
 for PLUGIN in ${PLUGINS}
 do
@@ -63,7 +63,7 @@ do
    if [ ! -e ${PLUGIN}.hpi ];
    then
       curl -s -L -O http://updates.jenkins-ci.org/latest/${PLUGIN}.hpi
-      if [ $(file ${PLUGIN}.hpi | grep -i html | wc -l) -gt 0 ];
+      if [ $(file ${PLUGIN}.hpi | grep -i zip | wc -l) -eq 0 ];
       then
          echo "${PLUGIN}.hpi may not have been downloaded correctly.  try again."
          rm -f ${PLUGIN}.hpi
