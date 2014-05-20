@@ -1,16 +1,17 @@
 #!/bin/bash
 
+ROOT_DIR=$(dirname $(readlink -f $0) | sed 's/\/bin$//')
 echo "Shutting down master jenkins"
-bin/stop.sh
+${ROOT_DIR}/bin/stop.sh
 echo "Shutting down demo server"
-if [ -e "slave/workspace/demo.deploy/bin/stop.sh" ];
+if [ -e "${ROOT_DIR}/slave/workspace/demo.deploy/bin/stop.sh" ];
 then
-   slave/workspace/demo.deploy/bin/stop.sh
+   ${ROOT_DIR}/slave/workspace/demo.deploy/bin/stop.sh
 fi
 echo "Cleaning up master server"
-rm -rf master
-rm -f *.hpi
-rm -f *.war
+rm -rf ${ROOT_DIR}/master
+rm -f ${ROOT_DIR}/*.hpi
+rm -f ${ROOT_DIR}/*.war
 
 echo "Cleaning up slave"
-rm -rf slave
+rm -rf ${ROOT_DIR}/slave

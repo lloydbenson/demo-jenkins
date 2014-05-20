@@ -1,14 +1,19 @@
 #!/bin/bash
+
+ROOT_DIR=$(dirname $(readlink -f $0) | sed 's/\/bin$//')
+source ${ROOT_DIR}/master/.bashrc
 TIMEOUT=60
-PORT=8081
 ## stop
-java -jar master/jenkins-cli.jar -s http://localhost:${PORT} shutdown >/dev/null 2>&1
+if [ -e ${ROOT_DIR}/master/jenkins-cli.jar ];
+then
+   java -jar ${ROOT_DIR}/master/jenkins-cli.jar -s http://localhost:${JENKINS_PORT} shutdown >/dev/null 2>&1
+fi
 
 while true
 do
    sleep 5
    TIME=$(expr ${TIME} + 5)
-   if [ $(ps auxww | grep jenkins | grep -v grep | wc -l) -eq 0 ];
+   if [ $(ps auxww | grep java | grep 'jenkins.war' | grep -v grep | wc -l) -eq 0 ];
    then
       echo "Jenkins down"
       exit 0
@@ -16,7 +21,7 @@ do
    if [ ${TIME} -ge ${TIMEOUT} ]
    then
       echo "Timeout of ${TIMEOUT} exceed.  Killing forcefully."  
-      kill -9 $(ps auxww | grep jenkins | grep -v grep | awk '{print $2}')
+      kill -9 $(ps auxww | grep java | grep 'jenkins.war' | grep -v grep | awk '{print $2}')
       exit 2
    fi   
 done

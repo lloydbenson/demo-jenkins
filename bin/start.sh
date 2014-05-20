@@ -1,17 +1,20 @@
-source master/.bashrc
+#!/bin/bash
+
+ROOT_DIR=$(dirname $(readlink -f $0) | sed 's/\/bin$//')
+source ${ROOT_DIR}/master/.bashrc
 TIMEOUT=60
 PORT=8081
-JENKINS_LOG="master/log/jenkins.log"
+JENKINS_LOG="${ROOT_DIR}/master/log/jenkins.log"
 ## clearing out jenkins-master.log each time
 echo "Cleaning log out before we start"
-if [ ! -d master/log ];
+if [ ! -d ${ROOT_DIR}/master/log ];
 then
-   mkdir -p master/log
+   mkdir -p ${ROOT_DIR}/master/log
 else 
    rm -f ${JENKINS_LOG}
 fi
 echo "Starting jenkins"
-java -jar master/jenkins.war --httpPort=${PORT} > ${JENKINS_LOG} 2>&1 &
+java -jar ${ROOT_DIR}/master/jenkins.war --httpPort=${PORT} > ${JENKINS_LOG} 2>&1 &
 while true
 do
    sleep 5
