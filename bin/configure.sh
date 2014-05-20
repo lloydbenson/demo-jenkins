@@ -8,7 +8,7 @@ echo "Downloading the CLI from localhost"
 curl -s -L -O http://localhost:${JENKINS_PORT}/jnlpJars/jenkins-cli.jar
 ## install plugins
 ## order matters with installation due to dependencies
-PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view nodejs tap"
+PLUGINS="github-api github git-client scm-api git ghprb greenballs token-macro email-ext postbuildscript dashboard-view nodejs tap chucknorris"
 
 for PLUGIN in ${PLUGINS}
 do
@@ -23,6 +23,10 @@ cp ${ROOT_DIR}/cfg/global/master/*.xml .
 API_KEY=$(cat ${ROOT_DIR}/cfg/global/master/apikey.txt)
 sed -i "s/demotoken/${API_KEY}/" org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
 
+echo "Restarting Jenkins"
+java -jar jenkins-cli.jar -s http://localhost:${JENKINS_PORT} restart
+echo "Sleeping 30s"
+sleep 30
 
 echo "Installing slave"
 SLAVE_PATH=$(pwd | sed 's/master/slave/g' | sed 's/\/jenkins$//g' | sed 's/\//\\\//g')
@@ -31,11 +35,6 @@ sed -i "s/slavepath/${SLAVE_PATH}/" node-template.xml
 java -jar jenkins-cli.jar -s http://localhost:${JENKINS_PORT} create-node slave < node-template.xml
 rm -f node-template.xml
 
-echo "Restarting Jenkins"
-java -jar jenkins-cli.jar -s http://localhost:${JENKINS_PORT} restart
-
-echo "Sleeping 30s"
-sleep 30
 popd
 echo "Installing jobs"
 pushd ${ROOT_DIR}/cfg/jobs
