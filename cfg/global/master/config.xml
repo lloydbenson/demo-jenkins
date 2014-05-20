@@ -25,7 +25,7 @@
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+  <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
       <owner class="hudson" reference="../../.."/>
       <name>demo</name>
       <filterExecutors>false</filterExecutors>
@@ -52,26 +52,40 @@
       <rightPortletWidth>50%</rightPortletWidth>
       <leftPortlets>
         <hudson.plugins.view.dashboard.core.UnstableJobsPortlet>
-          <id>dashboard_portlet_12338</id>
+          <id>dashboard_portlet_9007</id>
           <name>Unstable Jobs</name>
           <showOnlyFailedJobs>false</showOnlyFailedJobs>
         </hudson.plugins.view.dashboard.core.UnstableJobsPortlet>
         <hudson.plugins.view.dashboard.stats.StatBuilds>
-          <id>dashboard_portlet_344</id>
+          <id>dashboard_portlet_12908</id>
           <name>Build statistics</name>
         </hudson.plugins.view.dashboard.stats.StatBuilds>
         <hudson.plugins.view.dashboard.stats.StatJobs>
-          <id>dashboard_portlet_29918</id>
+          <id>dashboard_portlet_6632</id>
           <name>Job statistics</name>
         </hudson.plugins.view.dashboard.stats.StatJobs>
+        <hudson.plugins.view.dashboard.core.JobsPortlet>
+          <id>dashboard_portlet_10239</id>
+          <name>Jobs Grid</name>
+          <columnCount>3</columnCount>
+          <fillColumnFirst>false</fillColumnFirst>
+        </hudson.plugins.view.dashboard.core.JobsPortlet>
       </leftPortlets>
       <rightPortlets>
+        <hudson.plugins.view.dashboard.test.TestStatisticsPortlet>
+          <id>dashboard_portlet_21728</id>
+          <name>Test Statistics Grid</name>
+          <useBackgroundColors>false</useBackgroundColors>
+          <skippedColor>FDB813</skippedColor>
+          <successColor>71E66D</successColor>
+          <failureColor>E86850</failureColor>
+        </hudson.plugins.view.dashboard.test.TestStatisticsPortlet>
         <hudson.plugins.view.dashboard.test.TestStatisticsChart>
-          <id>dashboard_portlet_97</id>
+          <id>dashboard_portlet_31155</id>
           <name>Test Statistics Chart</name>
         </hudson.plugins.view.dashboard.test.TestStatisticsChart>
         <hudson.plugins.view.dashboard.test.TestTrendChart>
-          <id>dashboard_portlet_17582</id>
+          <id>dashboard_portlet_11885</id>
           <name>Test Trend Chart</name>
           <graphWidth>300</graphWidth>
           <graphHeight>220</graphHeight>
@@ -82,11 +96,16 @@
       </rightPortlets>
       <topPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-          <id>dashboard_portlet_25897</id>
+          <id>dashboard_portlet_9774</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </topPortlets>
-      <bottomPortlets/>
+      <bottomPortlets>
+        <hudson.plugins.view.dashboard.stats.StatSlaves>
+          <id>dashboard_portlet_2215</id>
+          <name>Slaves statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatSlaves>
+      </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
   </views>
   <primaryView>All</primaryView>
