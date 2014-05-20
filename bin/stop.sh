@@ -7,6 +7,9 @@ TIMEOUT=60
 if [ -e ${ROOT_DIR}/master/jenkins-cli.jar ];
 then
    java -jar ${ROOT_DIR}/master/jenkins-cli.jar -s http://localhost:${JENKINS_PORT} shutdown >/dev/null 2>&1
+else
+   ## dont bother with timeout if theres no cli yet
+   TIME=${TIMEOUT}
 fi
 
 while true
