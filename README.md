@@ -10,10 +10,11 @@ This is a jenkins demo.  Here are the steps to set it up.
 
 The PR portion of the demo will not work for you due to obvious security reasons.  If you want to see it work, you can change the following:
 
-1.  change the git repo in the pr job to your own repo
-2.  setup a user with pull/push privs for that repo
+1.  setup a user with pull/push privs for that repo
+2.  add ssh key from your machine where jenkins is running to the user
 3.  to go the global configuration and put in your github.com api key for that user (you can generate one in that same location)
 4.  change the lloyddemo user in the global configuration to your user
 5.  change the lloyddemo user in the demo.pr job to your user
+6.  change the git repo in the pr job to your own repo
 
 if you actually tried this out, let me know that it worked!
