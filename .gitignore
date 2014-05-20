@@ -1,5 +1,5 @@
-master
-slave
+/master
+/slave
 *.hpi
 *.war
 *.log

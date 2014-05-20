@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ROOT_DIR=$(dirname $(readlink -f $0) | sed 's/\/bin$//')
+ROOT_DIR=$(dirname $(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)  | sed 's/\/bin$//')
+
 source ${ROOT_DIR}/master/.bashrc
 pushd ${ROOT_DIR}/master
 ## download the cli
@@ -21,7 +22,16 @@ done
 echo "Copying over master global files"
 cp ${ROOT_DIR}/cfg/global/master/*.xml .
 API_KEY=$(cat ${ROOT_DIR}/cfg/global/master/apikey.txt)
-sed -i "s/demotoken/${API_KEY}/" org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
+USER=$(whoami)
+if [ $(uname -s) == "Darwin" ];
+then
+   ## sigh bsd
+   sed -i "" "s/demotoken/${API_KEY}/" org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
+   sed -i "" "s/lloyddemo/${USER}/" credentials.xml
+else
+   sed -i "s/demotoken/${API_KEY}/" org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
+   sed -i "s/lloyddemo/${USER}/" credentials.xml
+fi
 
 echo "Restarting Jenkins"
 java -jar jenkins-cli.jar -s http://localhost:${JENKINS_PORT} restart
@@ -31,7 +41,13 @@ sleep 30
 echo "Installing slave"
 SLAVE_PATH=$(pwd | sed 's/master/slave/g' | sed 's/\/jenkins$//g' | sed 's/\//\\\//g')
 cp ${ROOT_DIR}/cfg/global/slave/node.xml node-template.xml
-sed -i "s/slavepath/${SLAVE_PATH}/" node-template.xml
+if [ $(uname -s) == "Darwin" ];
+then
+   ## sigh bsd
+   sed -i "" "s/slavepath/${SLAVE_PATH}/" node-template.xml
+else
+   sed -i "s/slavepath/${SLAVE_PATH}/" node-template.xml
+fi
 java -jar jenkins-cli.jar -s http://localhost:${JENKINS_PORT} create-node slave < node-template.xml
 rm -f node-template.xml
 

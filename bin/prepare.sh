@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR=$(dirname $(readlink -f $0) | sed 's/\/bin$//')
+ROOT_DIR=$(dirname $(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)  | sed 's/\/bin$//')
 
 ## setup ssh keys
 if [ ! -e ~/.ssh/id_rsa.pub ];
@@ -15,8 +15,7 @@ if [ $(grep -e "${PUB_KEY}" ~/.ssh/authorized_keys | wc -l) -eq 0 ];
 then
    echo "Adding ssh key to your authorized_keys file for demo"
    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-   echo yes | ssh localhost
-   exit
+   ssh localhost "exit"
 fi
 
 if [ ! -d "${ROOT_DIR}/master" ];
@@ -30,7 +29,13 @@ then
    cp ${ROOT_DIR}/cfg/.bashrc ${ROOT_DIR}/master
    ## when passing we have to fix it up so it handles the /
    MASTER_DIR=$(echo "${ROOT_DIR}/master" | sed 's/\//\\\//g')
-   sed -i "s/jenkinsmasterpath/${MASTER_DIR}/" ${ROOT_DIR}/master/.bashrc
+   if [ $(uname -s) == "Darwin" ];
+   then
+      ## sigh bsd
+      sed -i "" "s/jenkinsmasterpath/${MASTER_DIR}/" ${ROOT_DIR}/master/.bashrc
+   else
+      sed -i "s/jenkinsmasterpath/${MASTER_DIR}/" ${ROOT_DIR}/master/.bashrc
+   fi
 fi
 
 pushd ${ROOT_DIR}/master

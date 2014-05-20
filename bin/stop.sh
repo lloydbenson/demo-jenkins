@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ROOT_DIR=$(dirname $(readlink -f $0) | sed 's/\/bin$//')
+ROOT_DIR=$(dirname $(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)  | sed 's/\/bin$//')
+
 source ${ROOT_DIR}/master/.bashrc
 TIMEOUT=60
 ## stop

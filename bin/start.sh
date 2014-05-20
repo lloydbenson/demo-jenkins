@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ROOT_DIR=$(dirname $(readlink -f $0) | sed 's/\/bin$//')
+ROOT_DIR=$(dirname $(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)  | sed 's/\/bin$//')
+
 source ${ROOT_DIR}/master/.bashrc
 TIMEOUT=60
 PORT=8081
@@ -15,6 +16,7 @@ else
 fi
 echo "Starting jenkins"
 java -jar ${ROOT_DIR}/master/jenkins.war --httpPort=${PORT} > ${JENKINS_LOG} 2>&1 &
+TIME=0
 while true
 do
    sleep 5

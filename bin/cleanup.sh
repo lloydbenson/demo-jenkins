@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ROOT_DIR=$(dirname $(readlink -f $0) | sed 's/\/bin$//')
+ROOT_DIR=$(dirname $(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)  | sed 's/\/bin$//')
+
 echo "Shutting down master jenkins"
 ${ROOT_DIR}/bin/stop.sh
 echo "Shutting down demo server"
