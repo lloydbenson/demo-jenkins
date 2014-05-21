@@ -40,7 +40,17 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install
+      <command>if [ -e ~/.nvm/nvm.sh ];
+then
+   source ~/.nvm/nvm.sh
+fi
+npm --version
+if [ $? -ne 0 ];
+then
+  echo &quot;npm is not installed.  Try https://github.com/creationix/nvm&quot;
+  exit 2
+fi
+npm install
 make test-cov-tap
 make test-cov-html</command>
     </hudson.tasks.Shell>
@@ -58,36 +68,6 @@ make test-cov-html</command>
       <validateNumberOfTests>false</validateNumberOfTests>
       <planRequired>true</planRequired>
     </org.tap4j.plugin.TapPublisher>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2.2">
-      <recipientList>lloyd.benson@gmail.com</recipientList>
-      <configuredTriggers>
-        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>true</sendToRequester>
-            <includeCulprits>true</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-            <attachmentsPattern></attachmentsPattern>
-            <attachBuildLog>false</attachBuildLog>
-            <compressBuildLog>false</compressBuildLog>
-            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
-            <contentType>project</contentType>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-      </configuredTriggers>
-      <contentType>default</contentType>
-      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>$DEFAULT_CONTENT</defaultContent>
-      <attachmentsPattern></attachmentsPattern>
-      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
-      <attachBuildLog>false</attachBuildLog>
-      <compressBuildLog>false</compressBuildLog>
-      <replyTo>$DEFAULT_REPLYTO</replyTo>
-      <saveOutput>false</saveOutput>
-    </hudson.plugins.emailext.ExtendedEmailPublisher>
     <hudson.tasks.BuildTrigger>
       <childProjects>demo.build</childProjects>
       <threshold>
@@ -113,9 +93,5 @@ make test-cov-html</command>
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
   </publishers>
-  <buildWrappers>
-    <jenkins.plugins.nodejs.tools.NpmPackagesBuildWrapper plugin="nodejs@0.2.1">
-      <nodeJSInstallationName>nodejs-v0.11.x</nodeJSInstallationName>
-    </jenkins.plugins.nodejs.tools.NpmPackagesBuildWrapper>
-  </buildWrappers>
+  <buildWrappers/>
 </project>

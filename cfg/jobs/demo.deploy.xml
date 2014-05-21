@@ -32,37 +32,6 @@
       <command>deploy/deploy.sh</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2.2">
-      <recipientList>lloyd.benson@gmail.com</recipientList>
-      <configuredTriggers>
-        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>true</sendToRequester>
-            <includeCulprits>true</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-            <attachmentsPattern></attachmentsPattern>
-            <attachBuildLog>false</attachBuildLog>
-            <compressBuildLog>false</compressBuildLog>
-            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
-            <contentType>project</contentType>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-      </configuredTriggers>
-      <contentType>default</contentType>
-      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>$DEFAULT_CONTENT</defaultContent>
-      <attachmentsPattern></attachmentsPattern>
-      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
-      <attachBuildLog>false</attachBuildLog>
-      <compressBuildLog>false</compressBuildLog>
-      <replyTo>$DEFAULT_REPLYTO</replyTo>
-      <saveOutput>false</saveOutput>
-    </hudson.plugins.emailext.ExtendedEmailPublisher>
-  </publishers>
+  <publishers/>
   <buildWrappers/>
 </project>
