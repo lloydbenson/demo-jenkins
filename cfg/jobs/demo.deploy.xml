@@ -29,7 +29,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>app/demo-hapi/bin/stop.sh
+      <command>if [ -e app/demo-hapi/bin/stop.sh ];
+then
+   app/demo-hapi/bin/stop.sh
+fi
 deploy/deploy.sh
 cd app/demo-hapi
 bin/start.sh</command>
