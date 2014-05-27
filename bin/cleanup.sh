@@ -5,7 +5,7 @@ ROOT_DIR=$(dirname $(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)  | sed 's/\/bi
 echo "Shutting down master jenkins"
 ${ROOT_DIR}/bin/stop.sh
 echo "Shutting down demo server"
-if [ -e "${ROOT_DIR}/slave/workspace/demo.deploy/bin/stop.sh" ];
+if [ -e ${ROOT_DIR}/slave/workspace/demo.deploy/bin/stop.sh ];
 then
    ${ROOT_DIR}/slave/workspace/demo.deploy/bin/stop.sh
 fi

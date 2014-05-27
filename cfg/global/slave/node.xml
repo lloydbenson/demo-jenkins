@@ -10,6 +10,7 @@
     <host>localhost</host>
     <port>22</port>
     <credentialsId>cbbb3d41-0221-4a87-b194-052491f3f4d6</credentialsId>
+    <jvmOptions>-Djava.awt.headless=true</jvmOptions>
   </launcher>
   <label>slave</label>
   <nodeProperties/>
