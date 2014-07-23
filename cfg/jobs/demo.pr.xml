@@ -62,6 +62,16 @@
   <builders>
     <hudson.tasks.Shell>
       <command>sleep 60
+if [ -e ~/.nvm/nvm.sh ];
+then
+   source ~/.nvm/nvm.sh
+fi
+npm --version
+if [ $? -ne 0 ];
+then
+  echo &quot;npm is not installed.  Try https://github.com/creationix/nvm&quot;
+  exit 2
+fi
 node --version
 npm --version
 npm install
@@ -125,9 +135,4 @@ make test-cov-html</command>
       <planRequired>true</planRequired>
     </org.tap4j.plugin.TapPublisher>
   </publishers>
-  <buildWrappers>
-    <jenkins.plugins.nodejs.tools.NpmPackagesBuildWrapper plugin="nodejs@0.2.1">
-      <nodeJSInstallationName>nodejs-v0.11.x</nodeJSInstallationName>
-    </jenkins.plugins.nodejs.tools.NpmPackagesBuildWrapper>
-  </buildWrappers>
 </project>
