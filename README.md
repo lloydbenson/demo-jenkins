@@ -17,7 +17,7 @@ After configure you should see on http://localhost:8081
 6.  demo.build will be successful and cause demo.deploy to be triggered
 7.  demo.deploy will deploy the last successful build artifact and startup a server http://localhost:8888/examples/hello
 
-note: on a mac, jenkins doesnt seem to like backgrounding processes so instead I keep the the job running with a while true loop.  For demo purposes this is fine.  It will never success on a mac and you need to abort to shut it down.  Ideally you would use plist or something on the mac.  Typically, you would likely copy the artifact to a remote machine and stop, deploy, start that way.  PRs welcome if you have a better work around.
+note: on a mac, jenkins doesnt seem to like backgrounding processes so instead I keep the the job running with a while true loop.  For demo purposes this is fine.  It will never succeed on a mac and you need to abort to shut it down.  Ideally you would use plist or something on the mac.  Typically, you would likely copy the artifact to a remote machine and stop, deploy, start that way.  PRs welcome if you have a better work around.
 
 The PR portion of the demo will not work for you for obvious security reasons.  If you want to see it work, you can change the following:
 
