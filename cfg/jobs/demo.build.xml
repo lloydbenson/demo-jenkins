@@ -53,6 +53,10 @@
         <completeBuild>true</completeBuild>
       </threshold>
     </hudson.tasks.BuildTrigger>
+    <hudson.tasks.Fingerprinter>
+      <targets>*.tar.gz</targets>
+      <recordBuildArtifacts>false</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
   </publishers>
   <buildWrappers/>
 </project>
