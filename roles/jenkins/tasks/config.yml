@@ -26,3 +26,9 @@
   template:
     src=ghprb.xml.j2
     dest={{ jenkins_home }}/org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
+
+- name: generate slaves
+  template:
+    src=node.xml.j2
+    dest={{ jenkins_home }}/nodes/{{ item.name }}/config.xml
+  with_items: "{{ jenkins_slaves }}"

@@ -9,6 +9,16 @@
     mode=0755
   become: true
 
+- name: mkdir jenkins slave dirs
+  file:
+    path={{ jenkins_home }}/nodes/{{ item.name }}
+    state=directory
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
+    mode=0755
+  with_items: "{{ jenkins_slaves }}"
+
+
 #  - name: create jenkins users dir
 #    file:
 #      path={{ jenkins_home }}/{{ item }}

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<slave>
+  <name>{{ item.name }}</name>
+  <description></description>
+  <remoteFS>{{ item.dir }}</remoteFS>
+  <numExecutors>2</numExecutors>
+  <mode>NORMAL</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.11">
+    <host>{{ item.host }}</host>
+    <port>22</port>
+    <credentialsId>a4a6e549-0a18-4b62-b64c-4baca74c98b4</credentialsId>
+    <maxNumRetries>0</maxNumRetries>
+    <retryWaitTime>0</retryWaitTime>
+  </launcher>
+  <label></label>
+  <nodeProperties/>
+</slave>

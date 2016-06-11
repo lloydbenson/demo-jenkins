@@ -19,14 +19,7 @@
   with_items:
     - plugins
     - jobs
-
-- name: mkdir jenkins home dir
-  file:
-    path={{ jenkins_home }}
-    state=directory
-    owner={{ jenkins_user }}
-    group={{ jenkins_group }}
-    mode=0755
+    - nodes
 
 - name: get local ssh pub key
   shell: cat /home/{{ jenkins_user }}/.ssh/id_rsa.pub
