@@ -1,0 +1,37 @@
+---
+
+- name: mkdir apps dir
+  file:
+    path={{ jenkins_apps }}
+    state=directory
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
+    mode=0755
+  become: true
+
+- name: mkdir jenkins install dirs
+  file:
+    path={{ jenkins_install }}/{{ item }}
+    state=directory
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
+    mode=0755
+  with_items:
+    - plugins
+    - jobs
+
+- name: mkdir jenkins home dir
+  file:
+    path={{ jenkins_home }}
+    state=directory
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
+    mode=0755
+
+- name: get local ssh pub key
+  shell: cat /home/{{ jenkins_user }}/.ssh/id_rsa.pub
+  register: pub_key
+  changed_when: false
+
+- name: add local authorized key
+  authorized_key: user={{ jenkins_user }} key="{{ lookup('file', '/home/{{ jenkins_user }}/.ssh/id_rsa.pub') }}"

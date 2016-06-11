@@ -1,0 +1,6 @@
+---
+
+- name: import pr jobs
+  shell: "{{ jenkins_cli2 }} create-job pr.{{ item }} < {{ jenkins_install }}/jobs/pr.{{ item }}.xml"
+  with_items:
+    - hapi-examples

@@ -1,0 +1,4 @@
+---
+
+- name: wait for jenkins to come up
+  pause: seconds=60

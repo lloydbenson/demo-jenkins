@@ -6,3 +6,5 @@
 *.jar
 apikey.txt
 node_modules
+host_vars/jenkins/main.yml
+*.retry

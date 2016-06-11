@@ -1,0 +1,8 @@
+---
+
+- name: generate pr jobs
+  template:
+    src=pr.xml.j2
+    dest={{ jenkins_install }}/jobs/pr.{{ item }}.xml
+  with_items:
+    - hapi-examples

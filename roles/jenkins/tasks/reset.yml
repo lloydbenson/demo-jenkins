@@ -1,0 +1,15 @@
+---
+
+- name: stop jenkins
+  include: stop.yml
+
+- name: cleanup jenkins home dir
+  file: path={{ jenkins_home }} state=absent
+
+- name: cleanup jenkins install dir
+  file: path={{ jenkins_install }} state=absent
+
+- name: cleanup jenkins service
+  file: path=/etc/systemd/system/jenkins.service state=absent
+  become: true
+

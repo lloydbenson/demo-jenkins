@@ -1,0 +1,98 @@
+---
+
+- name: create jenkins home dir
+  file:
+    path={{ jenkins_home }}
+    state=directory
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
+    mode=0755
+  become: true
+
+#  - name: create jenkins users dir
+#    file:
+#      path={{ jenkins_home }}/{{ item }}
+#      state=directory
+#      owner={{ jenkins_user }}
+#      group={{ jenkins_group }}
+#      mode=0755
+#    become: true
+#    with_items:
+#      - users
+
+- name: create user directories
+  file:
+    path={{ jenkins_home }}/users/{{ item.name }}
+    state=directory
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
+    mode=0755
+  with_items: "{{ jenkins_users }}"
+
+- name: generate users
+  template:
+    src=users.xml.j2
+    dest={{ jenkins_home }}/users/{{ item.name }}/config.xml
+  with_items: "{{ jenkins_users }}"
+
+- name: generate phase1 config
+  template:
+    src=phase1-config.xml.j2
+    dest={{ jenkins_home }}/config.xml
+  with_items: "{{ jenkins_users }}"
+
+- name: create logs dir
+  file:
+    path={{ jenkins_home }}/logs
+    state=directory
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
+    mode=0755
+
+- name: copy jenkins.war
+  copy: remote_src=true
+    src={{ jenkins_install }}/jenkins.war
+    dest={{ jenkins_home }}/jenkins.war
+
+- name: generate jenkins systemd
+  template:
+    src=jenkins.service.j2
+    dest=/etc/systemd/system/jenkins.service
+  register: systemd
+  become: true
+
+- name: reload systemd 
+  shell: systemctl daemon-reload
+  when: systemd.changed
+  become: true
+    
+- include: start.yml
+- include: wait.yml
+
+- name: download cli
+  get_url:
+    url=http://localhost:8080/jnlpJars/jenkins-cli.jar
+    dest={{ jenkins_home }}/jenkins-cli.jar
+
+#  - name: download update.json
+#    get_url:
+#      url=http://updates.jenkins-ci.org/update-center.json
+#      dest={{ jenkins_install }}
+
+#  - name: update instance with downloaded update.json
+#    shell: "curl -X POST -H \"Accept: application/json\" -d @{{ jenkins_install }}/update-center.json http://localhost:8080/updateCenter/byId/default/postBack --verbose"
+
+- name: install plugins
+  shell: "{{ jenkins_cli }} install-plugin {{ jenkins_install }}/plugins/{{ item }}.hpi"
+#  shell: "{{ jenkins_cli }} install-plugin {{ jenkins_update_url }}/{{ item }}/latest/{{ item }}.hpi"
+#  shell: "{{ jenkins_cli }} install-plugin {{ item }}"
+  with_items: "{{ plugins }}"
+
+- name: get available plugins
+  shell: "{{ jenkins_cli }} list-plugins | grep -e ')$' | awk '{print $1}'"
+  register: available_plugins
+  changed_when: false
+
+- name: update available plugins
+  shell: "{{ jenkins_cli }} install-plugin {{ item }}"
+  with_items: "{{ available_plugins.stdout_lines }}"

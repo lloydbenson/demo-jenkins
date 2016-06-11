@@ -1,0 +1,22 @@
+---
+
+#  - include: patch.yml
+  - include: prepare.yml
+  - include: generate.yml
+  - include: download.yml
+  - include: stop.yml
+#  - include: cleanup.yml
+#  - include: backup.yml
+#  - include: docker.yml
+#  - include: nodejs.yml
+#  - include: nginx.yml
+  - include: install.yml
+  - include: config.yml
+  - include: stop.yml
+  - include: start.yml
+  - include: wait.yml
+  - include: jobs.yml
+  - include: stop.yml
+  - include: start.yml
+  - include: reset.yml
+    tags: ['reset']

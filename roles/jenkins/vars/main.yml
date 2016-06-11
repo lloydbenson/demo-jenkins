@@ -1,0 +1,43 @@
+plugins:
+  ### dependencies
+  - credentials
+  - ssh-credentials
+  - plain-credentials
+  ## requires ssh-credentials
+  - git-client
+  - scm-api
+  - script-security
+  - junit
+  ## requires script-security junit
+  - matrix-project
+  - mailer
+  ## requires credentials mailer scm-api git-client matrix-project ssh-credentials
+  - git
+  - github-api
+  - structs
+  ## requires structs
+  - workflow-step-api
+  - bouncycastle-api
+  ## requires workflow-step-api credentials bouncycastle-api ssh-credentials
+  - ssh-agent
+  - token-macro
+  - github
+  - icon-shim
+  ### top level plugins
+  - ansicolor
+  - greenballs
+  ## requires mailer git and github-api
+  - github-oauth
+  ## requires token-macro junit matrix-project mailer
+  - email-ext
+  # requires plain-credentials github git ssh-agent github-api credentials matrix-project
+  - ghprb
+  # requires icon-shim
+  - matrix-auth
+  - antisamy-markup-formatter
+  - ssh-slaves
+jenkins_java_args: "-XX:MaxPermSize=512m -Duser.timezone=America/Chicago -Djava.awt.headless=true -Dfile.encoding=UTF8 -Dhudson.diyChunking=false -Djenkins.install.runSetupWizard=false"
+jenkins_path: "/apps/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+jenkins_cli: java -jar {{ jenkins_home }}/jenkins-cli.jar -s http://localhost:8080
+jenkins_cli2: java -jar {{ jenkins_home }}/jenkins-cli.jar -s http://lloydbenson@localhost:8080
+jenkins_update_url: http://updates.jenkins-ci.org/download/plugins
