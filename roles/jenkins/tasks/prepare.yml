@@ -19,7 +19,6 @@
   with_items:
     - plugins
     - jobs
-    - nodes
 
 - name: get local ssh pub key
   shell: cat /home/{{ jenkins_user }}/.ssh/id_rsa.pub
