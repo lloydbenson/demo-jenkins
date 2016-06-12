@@ -45,11 +45,10 @@
     dest={{ jenkins_home }}/users/{{ item.name }}/config.xml
   with_items: "{{ jenkins_users }}"
 
-- name: generate phase1 config
+- name: generate nosecurity config
   template:
-    src=phase1-config.xml.j2
+    src=config-nosecurity.xml.j2
     dest={{ jenkins_home }}/config.xml
-  with_items: "{{ jenkins_users }}"
 
 - name: create logs dir
   file:

@@ -6,9 +6,9 @@
 #    dest={{ jenkins_home }}/users/{{ item.name }}/config.xml
 #  with_items: "{{ jenkins_users }}"
 
-- name: generate phase2 config
+- name: generate main config
   template:
-    src=phase2-config.xml.j2
+    src=config.xml.j2
     dest={{ jenkins_home }}/config.xml
   
 - name: generate credentials
