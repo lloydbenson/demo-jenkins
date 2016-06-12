@@ -6,3 +6,10 @@
     dest={{ jenkins_install }}/jobs/pr.{{ item }}.xml
   with_items:
     - hapi-examples
+
+- name: generate snapshot jobs
+  template:
+    src=snapshot.xml.j2
+    dest={{ jenkins_install }}/jobs/snapshot.{{ item }}.xml
+  with_items:
+    - hapi-examples
