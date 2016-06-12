@@ -23,6 +23,9 @@ plugins:
   - token-macro
   - github
   - icon-shim
+  - javadoc
+  ## requires junit javadoc mailer
+  - maven-plugin
   ### top level plugins
   - ansicolor
   - greenballs
@@ -36,8 +39,20 @@ plugins:
   - matrix-auth
   - antisamy-markup-formatter
   - ssh-slaves
+  ## requires maven-plugin
+  - dashboard-view
+  - build-monitor-plugin
 jenkins_java_args: "-XX:MaxPermSize=512m -Duser.timezone=America/Chicago -Djava.awt.headless=true -Dfile.encoding=UTF8 -Dhudson.diyChunking=false -Djenkins.install.runSetupWizard=false"
 jenkins_path: "/apps/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
 jenkins_cli: java -jar {{ jenkins_home }}/jenkins-cli.jar -s http://localhost:8080
 jenkins_cli2: java -jar {{ jenkins_home }}/jenkins-cli.jar -s http://lloydbenson@localhost:8080
 jenkins_update_url: http://updates.jenkins-ci.org/download/plugins
+views:
+  - { name: 'deploy', regex: 'deploy.*' }
+  - { name: 'pr', regex: 'pr.*' }
+dashboard_views:
+  - { name: 'snapshot', regex: 'snapshot.*' }
+  - { name: 'release', regex: 'release.*' }
+monitor_views:
+  - { name: 'view_snapshot', regex: 'snapshot.*' }
+  - { name: 'view_release', regex: 'release.*' }

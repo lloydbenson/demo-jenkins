@@ -37,6 +37,134 @@
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
+{% for view in views %}
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>{{ view.name }}</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <includeRegex>{{ view.regex }}</includeRegex>
+      <recurse>false</recurse>
+    </listView>
+{% endfor %}
+{% for view in dashboard_views %}
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+      <owner class="hudson" reference="../../.."/>
+      <name>{{ view.name }}</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <includeRegex>{{ view.regex }}</includeRegex>
+      <recurse>false</recurse>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>false</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets>
+        <hudson.plugins.view.dashboard.core.UnstableJobsPortlet>
+          <id>dashboard_portlet_9007</id>
+          <name>Unstable Jobs</name>
+          <showOnlyFailedJobs>false</showOnlyFailedJobs>
+        </hudson.plugins.view.dashboard.core.UnstableJobsPortlet>
+        <hudson.plugins.view.dashboard.stats.StatBuilds>
+          <id>dashboard_portlet_12908</id>
+          <name>Build statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatBuilds>
+        <hudson.plugins.view.dashboard.stats.StatJobs>
+          <id>dashboard_portlet_6632</id>
+          <name>Job statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatJobs>
+        <hudson.plugins.view.dashboard.core.JobsPortlet>
+          <id>dashboard_portlet_10239</id>
+          <name>Jobs Grid</name>
+          <columnCount>3</columnCount>
+          <fillColumnFirst>false</fillColumnFirst>
+        </hudson.plugins.view.dashboard.core.JobsPortlet>
+      </leftPortlets>
+      <rightPortlets>
+        <hudson.plugins.view.dashboard.test.TestStatisticsPortlet>
+          <id>dashboard_portlet_21728</id>
+          <name>Test Statistics Grid</name>
+          <useBackgroundColors>false</useBackgroundColors>
+          <skippedColor>FDB813</skippedColor>
+          <successColor>71E66D</successColor>
+          <failureColor>E86850</failureColor>
+        </hudson.plugins.view.dashboard.test.TestStatisticsPortlet>
+        <hudson.plugins.view.dashboard.test.TestStatisticsChart>
+          <id>dashboard_portlet_31155</id>
+          <name>Test Statistics Chart</name>
+        </hudson.plugins.view.dashboard.test.TestStatisticsChart>
+        <hudson.plugins.view.dashboard.test.TestTrendChart>
+          <id>dashboard_portlet_11885</id>
+          <name>Test Trend Chart</name>
+          <graphWidth>300</graphWidth>
+          <graphHeight>220</graphHeight>
+          <dateRange>0</dateRange>
+          <dateShift>0</dateShift>
+          <displayStatus>ALL</displayStatus>
+        </hudson.plugins.view.dashboard.test.TestTrendChart>
+      </rightPortlets>
+      <topPortlets>
+        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+          <id>dashboard_portlet_9774</id>
+          <name>Jenkins jobs list</name>
+        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+      </topPortlets>
+      <bottomPortlets>
+        <hudson.plugins.view.dashboard.stats.StatSlaves>
+          <id>dashboard_portlet_2215</id>
+          <name>Slaves statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatSlaves>
+      </bottomPortlets>
+    </hudson.plugins.view.dashboard.Dashboard>
+{% endfor %}
+{% for view in monitor_views %}
+    <com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView plugin="build-monitor-plugin@1.9+build.201606052339">
+      <owner class="hudson" reference="../../.."/>
+      <name>{{ view.name }}</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters/>
+      <columns/>
+      <includeRegex>{{ view.regex }}</includeRegex>
+      <recurse>false</recurse>
+      <title>{{ view.name }}</title>
+      <config>
+        <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
+      </config>
+    </com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>
+{% endfor %}
   </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>0</slaveAgentPort>

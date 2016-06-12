@@ -10,7 +10,6 @@
   template:
     src=phase2-config.xml.j2
     dest={{ jenkins_home }}/config.xml
-  with_items: "{{ jenkins_users }}"
   
 - name: generate credentials
   template:
