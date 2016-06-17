@@ -5,7 +5,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.19.1">
-      <projectUrl>https://github.com/lloydbenson/{{ item }}</projectUrl>
+      <projectUrl>https://github.com/{{ github_org }}/{{ item }}</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
@@ -14,7 +14,7 @@
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <refspec>+refs/pull/*:refs/remotes/origin/pr/*</refspec>
-        <url>git@github.com:lloydbenson/{{ item }}</url>
+        <url>git@github.com:{{ github_org }}/{{ item }}</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -24,7 +24,7 @@
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <browser class="hudson.plugins.git.browser.GithubWeb">
-      <url>https://github.com/lloydbenson/{{ item }}</url>
+      <url>https://github.com/{{ github_org }}/{{ item }}</url>
     </browser>
     <submoduleCfg class="list"/>
     <extensions/>
