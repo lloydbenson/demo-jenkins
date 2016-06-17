@@ -7,3 +7,7 @@
 - name: import snapshot jobs
   shell: "{{ jenkins_cli }} create-job snapshot.{{ item }} < {{ jenkins_install }}/jobs/snapshot.{{ item }}.xml"
   with_items: "{{ repos }}"
+
+- name: import release jobs
+  shell: "{{ jenkins_cli }} create-job release.{{ item }} < {{ jenkins_install }}/jobs/release.{{ item }}.xml"
+  with_items: "{{ repos }}"

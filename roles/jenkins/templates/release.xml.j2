@@ -17,7 +17,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>origin/master</name>
+        <name>origin/tags/v*</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -43,10 +43,13 @@
       <command>rm -rf node_modules
 npm install
 npm test
+npm install nsp
+node_modules/nsp check
 npm prune
-#docker build --pull .
+#docker build --pull build .
 #docker tag
-#docker push</command>
+#docker push
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
