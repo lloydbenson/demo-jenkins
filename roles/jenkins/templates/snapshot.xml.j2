@@ -43,7 +43,6 @@
       <command>rm -rf node_modules
 npm install
 npm test
-npm prune
 docker build --pull -t {{ item }} .
 #docker tag -f {{ item }} {{ docker_url }}/{{ item }}
 #docker push {{ docker_url }}/{{ item }}</command>

@@ -45,11 +45,13 @@
 npm install
 npm test
 npm install nsp
-node_modules/nsp check
-npm prune
-#docker build --pull build .
-#docker tag
-#docker push
+node_modules/.bin/nsp check
+docker build --pull -t {{ item }} .
+VERSION=$(grep version package.json | awk -F'"' '{ print $4 }')
+docker tag -f {{ item }} {{ docker_url }}/{{ item }}:${VERSION}
+docker tag -f {{ item }} {{ docker_url }}/{{ item }}:release
+docker push {{ docker_url }}/{{ item }}:${VERSION}
+docker push {{ docker_url }}/{{ item }}:release
 </command>
     </hudson.tasks.Shell>
   </builders>
