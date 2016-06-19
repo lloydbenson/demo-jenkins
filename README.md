@@ -1,7 +1,8 @@
 This is a jenkins demo.  Here are the steps to set it up.
 
-1.  bin/reset.sh - this resets the environment
-2.  bin/deploy.sh - this will setup up the jenkins server.  To access it go to http://localhost:8080
+1.  Install ansible 2.x
+2.  bin/reset.sh - this resets the environment
+3.  bin/deploy.sh - this will setup up the jenkins server.  To access it go to http://localhost:8080
 
 After configure you should see on http://localhost:8080
 1.  within 1 min the demo.pr and demo.test jobs should start (if PR has been setup properly)
