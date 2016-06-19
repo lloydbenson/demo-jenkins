@@ -7,8 +7,7 @@
   - include: stop.yml
 #  - include: cleanup.yml
 #  - include: backup.yml
-#  - include: docker.yml
-#  - include: nodejs.yml
+  - include: docker.yml
 #  - include: nginx.yml
   - include: install.yml
   - include: config.yml

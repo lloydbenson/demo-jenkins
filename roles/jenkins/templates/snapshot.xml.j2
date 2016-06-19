@@ -44,15 +44,16 @@
 npm install
 npm test
 npm prune
-#docker build --pull .
-#docker tag
-#docker push</command>
+docker build --pull -t {{ item }} .
+#docker tag -f {{ item }} {{ docker_url }}/{{ item }}
+#docker push {{ docker_url }}/{{ item }}</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+{% include 'roles/jenkins/templates/partials/junit.xml' %}
+{% include 'roles/jenkins/templates/partials/coverage.xml' %}
+  </publishers>
   <buildWrappers>
-    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
-      <colorMapName>xterm</colorMapName>
-    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+{% include 'roles/jenkins/templates/partials/ansicolor.xml' %}
   </buildWrappers>
 </project>

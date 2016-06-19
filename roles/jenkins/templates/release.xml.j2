@@ -13,6 +13,7 @@
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <url>git@github.com:{{ github_org }}/{{ item }}</url>
+        <refspec>+refs/tags/*:refs/remotes/origin/tags/*</refspec>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -27,7 +28,7 @@
     <submoduleCfg class="list"/>
     <extensions/>
   </scm>
-  <assignedNode>snapshot</assignedNode>
+  <assignedNode>release</assignedNode>
   <canRoam>false</canRoam>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
@@ -52,10 +53,10 @@ npm prune
 </command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+{% include 'roles/jenkins/templates/partials/junit.xml' %}
+  </publishers>
   <buildWrappers>
-    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
-      <colorMapName>xterm</colorMapName>
-    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+{% include 'roles/jenkins/templates/partials/ansicolor.xml' %}
   </buildWrappers>
 </project>

@@ -1,5 +1,31 @@
 ---
 
+- name: generate ssh key
+  user: name={{ jenkins_user }} generate_ssh_key=yes
+
+- name: install packages
+  yum: name="{{ item }}" state=latest
+  become: true
+  with_items:
+    - gcc-c++
+    - git
+    - java-1.8.0-openjdk
+    - make
+    - nginx
+    - xorg-x11-server-Xvfb
+    - zip
+
+- name: accept github key
+  shell: ssh -o StrictHostKeyChecking=no -T git@github.com
+  ignore_errors: true
+  changed_when: false
+
+- name: ssh to deploy host
+  shell: ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no {{ jenkins_user }}@{{ item }} "cat /etc/hosts"
+  changed_when: false
+  ignore_errors: true
+  with_items: "{{ deploy_envs }}"
+
 - name: mkdir apps dir
   file:
     path={{ jenkins_apps }}
@@ -27,3 +53,12 @@
 
 - name: add local authorized key
   authorized_key: user={{ jenkins_user }} key="{{ lookup('file', '/home/{{ jenkins_user }}/.ssh/id_rsa.pub') }}"
+
+- name: get nodejs version
+  shell: /apps/node/bin/node -v
+  register: nodejs
+  ignore_errors: true
+  changed_when: false
+
+- include: nodejs.yml
+  when: nodejs.stdout != "{{ nodejs_version }}"

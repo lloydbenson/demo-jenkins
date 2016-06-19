@@ -42,6 +42,8 @@ plugins:
   ## requires maven-plugin
   - dashboard-view
   - build-monitor-plugin
+  ## requires workflow-step-api matrix-project
+  - htmlpublisher
 jenkins_java_args: "-XX:MaxPermSize=512m -Duser.timezone=America/Chicago -Djava.awt.headless=true -Dfile.encoding=UTF8 -Dhudson.diyChunking=false -Djenkins.install.runSetupWizard=false"
 jenkins_path: "/apps/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
 jenkins_cli: java -jar {{ jenkins_home }}/jenkins-cli.jar -s http://localhost:8080
@@ -58,3 +60,4 @@ monitor_views:
 github_org: lloydbenson
 repos:
   - hapi-examples
+nodejs_version: v4.4.5

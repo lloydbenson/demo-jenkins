@@ -1,0 +1,16 @@
+---
+
+- name: download nodejs
+  get_url:
+    url=https://nodejs.org/dist/{{ nodejs_version }}/node-{{ nodejs_version }}-linux-x64.tar.xz
+    dest=/tmp/node-{{ nodejs_version }}-linux-x64.tar.xz
+
+- name: unpack nodejs
+  unarchive:
+    src=/tmp/node-{{ nodejs_version }}-linux-x64.tar.xz
+    dest=/apps
+    copy=no
+
+- name: mv nodejs
+  shell: mv /apps/node-{{ nodejs_version }}-linux-x64 /apps/node
+    

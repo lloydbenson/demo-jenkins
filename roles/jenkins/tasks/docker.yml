@@ -1,0 +1,6 @@
+---
+
+- name: setup docker json config
+  template:
+    src=docker.json.j2
+    dest=/home/{{ jenkins_user }}/.docker/config.json

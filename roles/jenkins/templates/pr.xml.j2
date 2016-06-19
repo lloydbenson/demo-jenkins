@@ -77,10 +77,11 @@ npm install
 npm test</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+{% include 'roles/jenkins/templates/partials/junit.xml' %}
+{% include 'roles/jenkins/templates/partials/coverage.xml' %}
+  </publishers>
   <buildWrappers>
-    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
-      <colorMapName>xterm</colorMapName>
-    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+{% include 'roles/jenkins/templates/partials/ansicolor.xml' %}
   </buildWrappers>
 </project>
