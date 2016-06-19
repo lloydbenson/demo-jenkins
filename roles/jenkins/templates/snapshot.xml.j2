@@ -44,13 +44,22 @@
 npm install
 npm test
 docker build --pull -t {{ item }} .
-#docker tag -f {{ item }} {{ docker_url }}/{{ item }}
-#docker push {{ docker_url }}/{{ item }}</command>
+docker tag -f {{ item }} {{ docker_url }}/{{ item }}
+docker push {{ docker_url }}/{{ item }}</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
 {% include 'roles/jenkins/templates/partials/junit.xml' %}
 {% include 'roles/jenkins/templates/partials/coverage.xml' %}
+    <hudson.tasks.BuildTrigger>
+      <childProjects>deploy.{{ item }}.dev</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers>
 {% include 'roles/jenkins/templates/partials/ansicolor.xml' %}

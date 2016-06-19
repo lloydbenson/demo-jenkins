@@ -47,7 +47,7 @@ npm test
 npm install nsp
 node_modules/.bin/nsp check
 docker build --pull -t {{ item }} .
-VERSION=$(grep version package.json | awk -F'"' '{ print $4 }')
+VERSION=$(echo ${GIT_BRANCH} | awk -F/ '{print $NF}')
 docker tag -f {{ item }} {{ docker_url }}/{{ item }}:${VERSION}
 docker tag -f {{ item }} {{ docker_url }}/{{ item }}:release
 docker push {{ docker_url }}/{{ item }}:${VERSION}
@@ -57,6 +57,15 @@ docker push {{ docker_url }}/{{ item }}:release
   </builders>
   <publishers>
 {% include 'roles/jenkins/templates/partials/junit.xml' %}
+    <hudson.tasks.BuildTrigger>
+      <childProjects>deploy.{{ item }}.qa</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers>
 {% include 'roles/jenkins/templates/partials/ansicolor.xml' %}

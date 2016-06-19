@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>VERSION</name>
+          <description></description>
+{% if item[1] == 'qa' %}
+          <defaultValue>release</defaultValue>
+{% else %}
+          <defaultValue>latest</defaultValue>
+{% endif %}
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>if [ &quot;${ENV_TYPE}&quot; == &quot;prod&quot; ]
+then
+  echo &quot;Sorry prod is not allowed.&quot;
+  exit 2
+fi
+
+## for demo all HOSTS are localhost
+HOST=localhost
+
+if [ &quot;${ENV_TYPE}&quot; == &quot;qa&quot; ];
+then
+  PORT=8084
+elif [ &quot;${ENV_TYPE}&quot; == &quot;dev&quot;  ];
+then
+  PORT=8083
+else 
+  echo &quot;${ENV_TYPE} is not supported&quot;
+  exit 2  
+fi
+
+if [ $(ssh ${HOST} &quot;docker ps -a | grep ${APP}-${ENV_TYPE}&quot; | wc -l) -gt 0 ];
+then
+  docker stop ${APP}-${ENV_TYPE}
+  docker rm ${APP}-${ENV_TYPE}
+fi
+
+ssh ${HOST} &quot;docker run -d --name ${APP}-${ENV_TYPE} -p ${PORT}:8080 lloydbenson/${APP}:${VERSION}&quot;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers>
+{% include 'roles/jenkins/templates/partials/ansicolor.xml' %}
+    <EnvInjectBuildWrapper plugin="envinject@1.92.1">
+      <info>
+        <propertiesContent>APP={{ item[0] }}
+ENV_TYPE={{ item[1] }}
+</propertiesContent>
+        <loadFilesFromMaster>false</loadFilesFromMaster>
+      </info>
+    </EnvInjectBuildWrapper>
+  </buildWrappers>
+</project>

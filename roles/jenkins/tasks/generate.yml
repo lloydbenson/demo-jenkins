@@ -10,10 +10,18 @@
   template:
     src=snapshot.xml.j2
     dest={{ jenkins_install }}/jobs/snapshot.{{ item }}.xml
-  with_items: " {{ repos }}"
+  with_items: "{{ repos }}"
 
 - name: generate release jobs
   template:
     src=release.xml.j2
     dest={{ jenkins_install }}/jobs/release.{{ item }}.xml
-  with_items: " {{ repos }}"
+  with_items: "{{ repos }}"
+
+- name: generate deploy jobs
+  template:
+    src=deploy.xml.j2
+    dest={{ jenkins_install }}/jobs/deploy.{{ item[0] }}.{{ item[1] }}.xml
+  with_nested:
+    - "{{ repos }}"
+    - "{{ deploy_envs }}"

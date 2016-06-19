@@ -11,3 +11,9 @@
 - name: import release jobs
   shell: "{{ jenkins_cli }} create-job release.{{ item }} < {{ jenkins_install }}/jobs/release.{{ item }}.xml"
   with_items: "{{ repos }}"
+
+- name: import deploy jobs
+  shell: "{{ jenkins_cli }} create-job deploy.{{ item[0] }}.{{ item[1] }} < {{ jenkins_install }}/jobs/deploy.{{ item[0] }}.{{ item[1] }}.xml"
+  with_nested:
+    - "{{ repos }}"
+    - "{{ deploy_envs }}"
