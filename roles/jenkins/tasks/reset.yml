@@ -13,3 +13,14 @@
   file: path=/etc/systemd/system/jenkins.service state=absent
   become: true
 
+- name: stop docker images
+  shell: docker ps -a | grep {{ item[0] }}-{{ item[1] }} | awk '{print $1}' | xargs docker stop
+  with_nested:
+    - "{{ repos }}"
+    - "{{ deploy_envs }}"
+
+- name: rm docker images
+  shell: docker ps -a | grep {{ item[0] }}-{{ item[1] }} | awk '{print $1}' | xargs docker rm
+  with_nested:
+    - "{{ repos }}"
+    - "{{ deploy_envs }}"
