@@ -24,3 +24,6 @@ The PR portion of the demo will not work for you for obvious security reasons.  
 7.  change the build block to do whatever logic you need for your testing
 
 if you actually tried this out, let me know that it worked!
+
+todo: cleanup npm and docker
+release vs snapshot race condition

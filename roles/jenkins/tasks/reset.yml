@@ -18,9 +18,21 @@
   with_nested:
     - "{{ repos }}"
     - "{{ deploy_envs }}"
+  ignore_errors: true
 
 - name: rm docker images
   shell: docker ps -a | grep {{ item[0] }}-{{ item[1] }} | awk '{print $1}' | xargs docker rm
   with_nested:
     - "{{ repos }}"
     - "{{ deploy_envs }}"
+  ignore_errors: true
+
+- name: cleanup of none docker images
+  shell: docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi
+  ignore_errors: true
+
+- name: cleanup of repo images
+  shell: docker images | grep {{ item }} | awk '{print $3}' | xargs docker rmi -f
+  with_items: "{{ repos }}"
+  ignore_errors: true
+
