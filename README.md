@@ -28,3 +28,5 @@ if you actually tried this out, let me know that it worked!
 todo: cleanup npm and docker
 release vs snapshot race condition
 finish up docker role
+theme?
+add other plugin likes?

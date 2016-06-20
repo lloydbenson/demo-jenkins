@@ -11,16 +11,19 @@ plugins:
   ## requires script-security junit
   - matrix-project
   - mailer
-  ## requires credentials mailer scm-api git-client matrix-project ssh-credentials
-  - git
-  - github-api
   - structs
   ## requires structs
   - workflow-step-api
+  ## requires workflow-step-api git-client
+  - workflow-scm-step
+  ## requires credentials mailer scm-api git-client matrix-project ssh-credentials workflow-scm-step
+  - git
+  - github-api
   - bouncycastle-api
   ## requires workflow-step-api credentials bouncycastle-api ssh-credentials
   - ssh-agent
   - token-macro
+  ## requires github-api credentials plain-credentials token-macro git
   - github
   - icon-shim
   - javadoc
@@ -45,6 +48,8 @@ plugins:
   ## requires workflow-step-api matrix-project
   - htmlpublisher
   - envinject
+  ## requires mailer maven-plugin javadoc
+  - postbuildscript
 jenkins_java_args: "-XX:MaxPermSize=512m -Duser.timezone=America/Chicago -Djava.awt.headless=true -Dfile.encoding=UTF8 -Dhudson.diyChunking=false -Djenkins.install.runSetupWizard=false -Dhudson.model.DirectoryBrowserSupport.CSP=''"
 jenkins_path: "/apps/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
 jenkins_cli: java -jar {{ jenkins_home }}/jenkins-cli.jar -s http://localhost:8080
