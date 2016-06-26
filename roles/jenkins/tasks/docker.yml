@@ -1,5 +1,14 @@
 ---
 
+- name: mkdir .docker
+  file:
+    path=/home/{{ jenkins_user }}/.docker
+    state=directory
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
+    mode=0755
+  become: true
+
 - name: setup docker json config
   template:
     src=docker.json.j2
