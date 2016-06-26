@@ -12,6 +12,7 @@
     - java-1.8.0-openjdk
     - make
     - nginx
+    - tar
     - xorg-x11-server-Xvfb
     - zip
 
