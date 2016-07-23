@@ -43,9 +43,9 @@
       <command>rm -rf node_modules
 npm install
 npm test
-docker build --pull -t {{ item }} .
-docker tag -f {{ item }} {{ docker_url }}/{{ item }}
-docker push {{ docker_url }}/{{ item }}</command>
+sudo docker build --pull -t {{ item }} .
+sudo docker tag --force {{ item }} {{ docker_url }}/{{ item }}
+sudo docker push {{ docker_url }}/{{ item }}</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

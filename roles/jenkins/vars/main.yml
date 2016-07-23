@@ -66,4 +66,4 @@ monitor_views:
 github_org: lloydbenson
 repos:
   - hapi-examples
-nodejs_version: v4.4.5
+nodejs_version: v4.4.7

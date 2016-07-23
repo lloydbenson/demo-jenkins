@@ -46,12 +46,12 @@ npm install
 npm test
 npm install nsp
 node_modules/.bin/nsp check
-docker build --pull -t {{ item }} .
+sudo docker build --pull -t {{ item }} .
 VERSION=$(echo ${GIT_BRANCH} | awk -F/ '{print $NF}')
-docker tag -f {{ item }} {{ docker_url }}/{{ item }}:${VERSION}
-docker tag -f {{ item }} {{ docker_url }}/{{ item }}:release
-docker push {{ docker_url }}/{{ item }}:${VERSION}
-docker push {{ docker_url }}/{{ item }}:release
+sudo docker tag --force {{ item }} {{ docker_url }}/{{ item }}:${VERSION}
+sudo docker tag --force {{ item }} {{ docker_url }}/{{ item }}:release
+sudo docker push {{ docker_url }}/{{ item }}:${VERSION}
+sudo docker push {{ docker_url }}/{{ item }}:release
 </command>
     </hudson.tasks.Shell>
   </builders>
