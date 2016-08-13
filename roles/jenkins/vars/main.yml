@@ -31,7 +31,7 @@ plugins:
   - maven-plugin
   ### top level plugins
   - ansicolor
-  - greenballs
+  - simple-theme-plugin
   ## requires mailer git and github-api
   - github-oauth
   ## requires token-macro junit matrix-project mailer
@@ -67,3 +67,4 @@ github_org: lloydbenson
 repos:
   - hapi-examples
 nodejs_version: v4.4.7
+theme_url: https://jenkins-contrib-themes.github.io/jenkins-material-theme/dist/material-teal.css

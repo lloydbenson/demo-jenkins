@@ -26,6 +26,11 @@
     src=ghprb.xml.j2
     dest={{ jenkins_home }}/org.jenkinsci.plugins.ghprb.GhprbTrigger.xml
 
+- name: generate theme
+  template:
+    src=theme.xml.j2
+    dest={{ jenkins_home }}/org.codefirst.SimpleThemeDecorator.xml
+
 - name: generate slaves
   template:
     src=node.xml.j2
