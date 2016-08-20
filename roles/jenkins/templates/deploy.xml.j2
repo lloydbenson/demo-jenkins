@@ -48,13 +48,13 @@ else
   exit 2  
 fi
 
-if [ $(ssh ${HOST} &quot;sudo docker ps -a | grep ${APP}-${ENV_TYPE}&quot; | wc -l) -gt 0 ];
+if [ $(ssh ${HOST} &quot;docker ps -a | grep ${APP}-${ENV_TYPE}&quot; | wc -l) -gt 0 ];
 then
   ssh ${HOST} &quot;docker stop ${APP}-${ENV_TYPE}&quot;
   docker rm &quot;${APP}-${ENV_TYPE}&quot;
 fi
 
-ssh ${HOST} &quot;sudo docker run -d --name ${APP}-${ENV_TYPE} -p ${PORT}:8080 lloydbenson/${APP}:${VERSION}&quot;</command>
+ssh ${HOST} &quot;docker run -d --name ${APP}-${ENV_TYPE} -p ${PORT}:8080 lloydbenson/${APP}:${VERSION}&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
