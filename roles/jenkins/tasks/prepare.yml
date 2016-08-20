@@ -16,10 +16,11 @@
     - xorg-x11-server-Xvfb
     - zip
 
-- name: accept github key
-  shell: ssh -o StrictHostKeyChecking=no -T git@github.com
-  ignore_errors: true
-  changed_when: false
+## no longer required using https
+#- name: accept github key
+#  shell: ssh -o StrictHostKeyChecking=no -T git@github.com
+#  ignore_errors: true
+#  changed_when: false
 
 - name: accept local key
   shell: ssh -o StrictHostKeyChecking=no localhost
