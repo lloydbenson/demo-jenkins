@@ -2,7 +2,7 @@
 
 - name: download jenkins.war
   get_url:
-    url=http://mirrors.jenkins-ci.org/war/{{ jenkins_version }}/jenkins.war
+    url=http://mirrors.jenkins-ci.org/war-stable/{{ jenkins_version }}/jenkins.war
     dest={{ jenkins_install }}/jenkins.war
 
 - name: download latest plugins

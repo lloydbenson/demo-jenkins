@@ -68,3 +68,4 @@ repos:
   - hapi-examples
 nodejs_version: v4.4.7
 theme_url: https://jenkins-contrib-themes.github.io/jenkins-material-theme/dist/material-teal.css
+jenkins_version: latest
