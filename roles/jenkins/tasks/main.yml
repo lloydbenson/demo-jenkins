@@ -17,5 +17,9 @@
   - include: jobs.yml
   - include: stop.yml
   - include: start.yml
+  - include: wait.yml
+  - include: secure.yml
+  - include: stop.yml
+  - include: start.yml
   - include: reset.yml
     tags: ['reset']

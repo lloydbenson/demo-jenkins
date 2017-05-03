@@ -10,6 +10,8 @@ plugins:
   - junit
   ## requires script-security junit
   - matrix-project
+  - display-url-api
+  ## requires display-url-api
   - mailer
   - structs
   ## requires structs
@@ -23,7 +25,7 @@ plugins:
   ## requires workflow-step-api credentials bouncycastle-api ssh-credentials
   - ssh-agent
   - token-macro
-  ## requires github-api credentials plain-credentials token-macro git
+  ## requires github-api credentials plain-credentials token-macro git display-url-api
   - github
   - icon-shim
   - javadoc
@@ -32,7 +34,20 @@ plugins:
   ### top level plugins
   - ansicolor
   - simple-theme-plugin
-  ## requires mailer git and github-api
+  - workflow-api
+  ## requires workflow-support ace-editor jquery-detached
+  - workflow-cps
+  - workflow-support
+  - ace-editor
+  - jquery-detached
+  ## requires workflow-support workflow-cps
+  - workflow-job
+  - branch-api
+  - cloudbees-folder
+  ## requires workflow-api workflow-cps workflow-job branch-api cloudbees-folder
+  - workflow-multibranch
+  - github-branch-source
+  ## requires mailer git and github-api workflow-multibranch github-branch-source
   - github-oauth
   ## requires token-macro junit matrix-project mailer
   - email-ext
@@ -49,10 +64,66 @@ plugins:
   - htmlpublisher
   - envinject
   ## requires mailer maven-plugin javadoc
-  - postbuildscript
+#  - postbuildscript
+  - postbuild-task
+  - jackson2-api
+  ## requires jackson2-api
+  - metrics
+  - variant
+  ## requires metrics and variant
+  - blueocean-web
+  ## has other requirements already here
+  - favorite
+  ## requires favorite
+  - blueocean-autofavorite
+  - blueocean-jwt
+  - blueocean-commons
+  - pubsub-light
+  - sse-gateway
+  ## requires sse-gateway pubsub-light
+  - blueocean-events
+  ## requires blueocean-events
+  - blueocean-personalization
+  - blueocean-display-url
+  - blueocean-rest-impl
+  - blueocean-pipeline-editor
+  - blueocean-github-pipeline
+  - durable-task
+  ## requires durable-task
+  - workflow-durable-task-step
+  - pipeline-graph-analysis
+  - pipeline-input-step
+  - pipeline-stage-step
+  - workflow-basic-steps
+  - git-server
+  ## requires git-server
+  - workflow-cps-global-lib
+  - credentials-binding
+  - authentication-tokens
+  ## requires authentication-tokens
+  - docker-commons
+  ## requires docker-commons
+  - docker-workflow
+  - pipeline-model-api
+  - pipeline-model-declarative-agent
+  - pipeline-model-extensions
+  - pipeline-stage-tags-metadata
+  - pipeline-model-definition
+  ## requires workflow-basic-steps workflow-cps-global-lib workflow-durable-task-step credentials-binding docker-workflow pipeline-model-api pipeline-model-declarative-agent pipeline-model-extensions pipeline-stage-tags-metadata pipeline-model-definition
+  ## requires workflow-durable-task-step pipeline-graph-analysis pipeline-input-step pipeline-stage-step pipeline-model-definition
+  - blueocean-rest
+  - blueocean-i18n
+  - blueocean-pipeline-api-impl
+#  - blueocean-events
+  ## requires blueocean-events
+  - blueocean-dashboard
+  - blueocean-git-pipeline
+  - blueocean-config
+  ## requires blueocean-web blueocean-autofavorite blueocean-jwt blueocean-commons blueocean-personalization blueocean-display-url blueocean-rest-impl blueocean-pipeline-editor blueocean-github-pipeline blueocean-rest blueocean-i18n blueocean-pipeline-api-impl blueocean-dashboard blueocean-git-pipeline blueocean-config
+  - blueocean
 jenkins_java_args: "-XX:MaxPermSize=512m -Duser.timezone=America/Chicago -Djava.awt.headless=true -Dfile.encoding=UTF8 -Dhudson.diyChunking=false -Djenkins.install.runSetupWizard=false -Dhudson.model.DirectoryBrowserSupport.CSP=''"
 jenkins_path: "/apps/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
-jenkins_cli: java -jar {{ jenkins_home }}/jenkins-cli.jar -s http://localhost:8080
+jenkins_cli: java -jar {{ jenkins_home }}/jenkins-cli.jar -remoting -s http://localhost:8080
 jenkins_update_url: http://updates.jenkins-ci.org/download/plugins
 views:
   - { name: 'deploy', regex: 'deploy.*' }

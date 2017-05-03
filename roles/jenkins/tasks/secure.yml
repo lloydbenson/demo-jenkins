@@ -1,0 +1,11 @@
+---
+
+- name: generate main config
+  template:
+    src=config.xml.j2
+    dest={{ jenkins_home }}/config.xml
+
+- name: generate jenkins-cli settings
+  template:
+    src=jenkins-cli.xml.j2
+    dest={{ jenkins_home }}/jenkins.CLI.xml
