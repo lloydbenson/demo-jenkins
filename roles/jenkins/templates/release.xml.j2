@@ -44,8 +44,7 @@
       <command>rm -rf node_modules
 npm install
 npm test
-npm install nsp
-node_modules/.bin/nsp check
+npm audit
 docker build --pull -t {{ item }} .
 VERSION=$(echo ${GIT_BRANCH} | awk -F/ '{print $NF}')
 docker tag --force {{ item }} {{ docker_url }}/{{ item }}:${VERSION}

@@ -22,10 +22,10 @@
 #  ignore_errors: true
 #  changed_when: false
 
-- name: accept local key
-  shell: ssh -o StrictHostKeyChecking=no localhost
-  ignore_errors: true
-  changed_when: false
+#- name: accept local key
+#  shell: ssh -o StrictHostKeyChecking=no localhost
+#  ignore_errors: true
+#  changed_when: false
 
 #- name: ssh to deploy host
 #  shell: ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no {{ jenkins_user }}@{{ item }} "cat /etc/hosts"
@@ -68,7 +68,7 @@
   changed_when: false
 
 - include: nodejs.yml
-  when: nodejs.stdout != "{{ nodejs_version }}"
+  when: nodejs.stdout != nodejs_version
 
 - name: ensure /etc/hosts entry for servers
   lineinfile: dest=/etc/hosts line="{{ item }}" state=present

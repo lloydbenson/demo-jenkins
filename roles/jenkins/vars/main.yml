@@ -3,7 +3,11 @@ plugins:
   - credentials
   - ssh-credentials
   - plain-credentials
+  - structs
   ## requires ssh-credentials
+  - jsch
+  - apache-httpcomponents-client-4-api
+  ## requires ssh-credentials struts jsch apache-httpcomponents-client-4-api
   - git-client
   - scm-api
   - script-security
@@ -13,7 +17,6 @@ plugins:
   - display-url-api
   ## requires display-url-api
   - mailer
-  - structs
   ## requires structs
   - workflow-step-api
   ## requires workflow-step-api git-client
@@ -37,10 +40,12 @@ plugins:
   - workflow-api
   ## requires workflow-support ace-editor jquery-detached
   - workflow-cps
+  ## requires workflow-api workflow-step-api script-security
   - workflow-support
   - ace-editor
   - jquery-detached
-  ## requires workflow-support workflow-cps
+  ## requires workflow-support workflow-step-api
+  ## fails
   - workflow-job
   - branch-api
   - cloudbees-folder
@@ -60,8 +65,8 @@ plugins:
   ## requires maven-plugin
   - dashboard-view
   - build-monitor-plugin
-  ## requires workflow-step-api matrix-project
-  - htmlpublisher
+  - envinject-api
+  ## requires envinject-api
   - envinject
   ## requires mailer maven-plugin javadoc
 #  - postbuildscript
@@ -70,7 +75,9 @@ plugins:
   ## requires jackson2-api
   - metrics
   - variant
-  ## requires metrics and variant
+  - jenkins-design-language
+  - blueocean-core-js
+  ## requires metrics and variant jenkins-design-language blueocean-core-js
   - blueocean-web
   ## has other requirements already here
   - favorite
@@ -113,14 +120,29 @@ plugins:
   ## requires workflow-durable-task-step pipeline-graph-analysis pipeline-input-step pipeline-stage-step pipeline-model-definition
   - blueocean-rest
   - blueocean-i18n
+  - pipeline-build-step
+  - blueocean-pipeline-scm-api
+  ## requires lots...but blueocean-pipeline-scm-api pipeline-build-step
   - blueocean-pipeline-api-impl
 #  - blueocean-events
   ## requires blueocean-events
   - blueocean-dashboard
   - blueocean-git-pipeline
   - blueocean-config
-  ## requires blueocean-web blueocean-autofavorite blueocean-jwt blueocean-commons blueocean-personalization blueocean-display-url blueocean-rest-impl blueocean-pipeline-editor blueocean-github-pipeline blueocean-rest blueocean-i18n blueocean-pipeline-api-impl blueocean-dashboard blueocean-git-pipeline blueocean-config
+  - handy-uri-templates-2-api
+  - mercurial
+  ## requires handy-uri-templates-2-api mercurial
+  - cloudbees-bitbucket-branch-source
+  ## requires cloudbees-bitbucket-branch-source
+  - blueocean-bitbucket-pipeline
+  - jira
+  ## requires jira
+  - blueocean-jira
+  - pipeline-milestone-step
+  ## requires blueocean-web blueocean-autofavorite blueocean-jwt blueocean-commons blueocean-personalization blueocean-display-url blueocean-rest-impl blueocean-pipeline-editor blueocean-github-pipeline blueocean-rest blueocean-i18n blueocean-pipeline-api-impl blueocean-dashboard blueocean-git-pipeline blueocean-config blueocean-bitbucket-pipeline blueocean-jira pipeline-milestone-step
   - blueocean
+  ## requires workflow-step-api matrix-project
+  - htmlpublisher
 jenkins_java_args: "-XX:MaxPermSize=512m -Duser.timezone=America/Chicago -Djava.awt.headless=true -Dfile.encoding=UTF8 -Dhudson.diyChunking=false -Djenkins.install.runSetupWizard=false -Dhudson.model.DirectoryBrowserSupport.CSP=''"
 jenkins_path: "/apps/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
 jenkins_cli: java -jar {{ jenkins_home }}/jenkins-cli.jar -remoting -s http://localhost:8080
@@ -137,6 +159,6 @@ monitor_views:
 github_org: lloydbenson
 repos:
   - hapi-examples
-nodejs_version: v4.4.7
+nodejs_version: v10.15.3
 theme_url: https://jenkins-contrib-themes.github.io/jenkins-material-theme/dist/material-teal.css
 jenkins_version: latest
